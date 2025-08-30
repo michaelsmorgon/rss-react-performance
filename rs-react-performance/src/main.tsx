@@ -1,4 +1,4 @@
-import { StrictMode } from 'react';
+import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
@@ -10,6 +10,12 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <App />
+    <Suspense
+      fallback={
+        <div className="spinner" aria-busy="true" aria-label="Loading data…" />
+      }
+    >
+      <App />
+    </Suspense>
   </StrictMode>
 );

@@ -1,35 +1,98 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { useCallback, useMemo, useState, useTransition } from 'react';
+import styles from './App.module.css';
+import type { SortKey } from './utils/types';
+import { useDataResource } from './hooks/useResourceData';
+import { getAllYears } from './utils/utils';
+import YearSelector from './components/search/YearSelector';
+import RegionSelector from './components/search/RegionSelector';
+import CountrySearch from './components/search/CountrySearch';
+import SortBy from './components/search/SortBy';
+import OrderBy from './components/search/OrderBy';
 
-function App() {
-  const [count, setCount] = useState(0);
+export default function App() {
+  const resource = useDataResource();
+  const data = resource.read();
+
+  const years = useMemo(() => getAllYears(data), [data]);
+  const [selectedYear, setSelectedYear] = useState<number>(
+    years[years.length - 1] ?? 2023
+  );
+  const [query, setQuery] = useState('');
+  const [regionFilter, setRegionFilter] = useState<string>('All');
+  const [sortBy, setSortBy] = useState<SortKey>('population');
+  const [orderBy, setOrderBy] = useState<'asc' | 'desc'>('desc');
+  const [isPending, startTransition] = useTransition();
+
+  const handleYearChange = useCallback((y: number) => {
+    startTransition(() => setSelectedYear(y));
+  }, []);
+
+  const handleQuery = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setQuery(event.target.value);
+    },
+    []
+  );
+
+  const handleRegion = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setRegionFilter(event.target.value);
+    },
+    []
+  );
+
+  const handleSortKey = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setSortBy(event.target.value as SortKey);
+    },
+    []
+  );
+
+  const handleOrderBy = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setOrderBy(event.target.value as 'asc' | 'desc');
+    },
+    []
+  );
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className={styles.app}>
+      <header className={styles.toolbar}>
+        <div className={styles.toolbarRow}>
+          <YearSelector
+            handleYearChange={handleYearChange}
+            selectedYear={selectedYear}
+            isPending={isPending}
+            years={years}
+            className={styles.control}
+          />
+
+          <RegionSelector
+            handleRegion={handleRegion}
+            data={data}
+            regionFilter={regionFilter}
+            className={styles.control}
+          />
+
+          <CountrySearch
+            handleQuery={handleQuery}
+            query={query}
+            className={`${styles.control} ${styles.grow}`}
+          />
+
+          <SortBy
+            handleSortKey={handleSortKey}
+            sortBy={sortBy}
+            className={styles.control}
+          />
+
+          <OrderBy
+            handleOrderBy={handleOrderBy}
+            orderBy={orderBy}
+            className={styles.control}
+          />
+        </div>
+      </header>
+    </div>
   );
 }
-
-export default App;
