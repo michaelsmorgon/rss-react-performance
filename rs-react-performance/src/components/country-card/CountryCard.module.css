@@ -1,0 +1,52 @@
+.card {
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  margin: 0;
+}
+
+.badge {
+  color: var(--accent-2);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #0f2d1a;
+  border: 1px solid #164927;
+}
+
+.meta {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.highlight {
+  background: var(--highlight);
+  color: #1a1a1a;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.tableWrap {
+  padding: 0px 12px 12px;
+  overflow: auto;
+  max-height: 400px;
+}

@@ -31,7 +31,14 @@
   gap: 6px;
   min-width: 130px;
 }
+
 .control.grow {
   flex: 1;
   min-width: 260px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 12px;
 }
