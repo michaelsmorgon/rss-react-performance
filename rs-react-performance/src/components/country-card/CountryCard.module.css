@@ -3,6 +3,14 @@
   background: var(--card);
   border-radius: 16px;
   overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  border-color: var(--accent);
 }
 
 .cardHeader {
@@ -12,6 +20,10 @@
   padding: 12px;
   border-bottom: 1px solid var(--border);
   font-size: 14px;
+}
+
+.cardHeader:hover {
+  background: rgba(255,255,255,0.05);
 }
 
 .title {

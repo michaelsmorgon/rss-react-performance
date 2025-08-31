@@ -1,5 +1,6 @@
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import type { AdditionalColumn, YearInfo } from '../../utils/types';
+import { DataTable } from '../data-table/DataTable';
 import { formatNumber, latestWithField } from '../../utils/utils';
 import styles from './CountryCard.module.css';
 
@@ -16,7 +17,10 @@ export const CountryCard = memo(function CountryCard({
   isoCode,
   rows,
   selectedYear,
+  extraColumns,
 }: Props) {
+  const [expanded, setExpanded] = useState(false);
+
   const selectedRow = useMemo(
     () => rows.find((yearData) => yearData.year === selectedYear),
     [rows, selectedYear]
@@ -28,7 +32,11 @@ export const CountryCard = memo(function CountryCard({
   );
 
   return (
-    <section className={styles.card} data-updated>
+    <section
+      className={styles.card}
+      data-updated
+      onClick={() => setExpanded((val) => !val)}
+    >
       <header className={styles.cardHeader}>
         <div className={styles.title}>
           <h3 className={styles.name}>{name}</h3>
@@ -49,6 +57,12 @@ export const CountryCard = memo(function CountryCard({
           </div>
         </div>
       </header>
+
+      {expanded && (
+        <div className={styles.tableWrap}>
+          <DataTable rows={rows} extraColumns={extraColumns} />
+        </div>
+      )}
     </section>
   );
 });
