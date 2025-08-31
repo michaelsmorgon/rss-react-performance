@@ -1,0 +1,44 @@
+.app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(
+    180deg,
+    rgba(9, 15, 28, 0.9),
+    rgba(9, 15, 28, 0.6)
+  );
+  border-bottom: 1px solid var(--border);
+  padding: 12px 8px;
+  margin: -16px -16px 16px -16px;
+}
+
+.toolbarRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+}
+
+.control {
+  display: grid;
+  gap: 6px;
+  min-width: 130px;
+}
+
+.control.grow {
+  flex: 1;
+  min-width: 260px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 12px;
+}

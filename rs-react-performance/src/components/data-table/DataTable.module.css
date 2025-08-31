@@ -1,0 +1,25 @@
+.dataTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.dataTable thead th {
+  position: sticky;
+  top: 0;
+  background: #0d172c;
+  z-index: 1;
+}
+
+.dataTable th,
+.dataTable td {
+  border-bottom: 1px solid var(--border);
+  padding: 6px 8px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.dataTable th:first-child,
+.dataTable td:first-child {
+  text-align: left;
+}

@@ -1,0 +1,52 @@
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+}
+
+.modal {
+  width: min(1100px, 92vw);
+  max-height: 90vh;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.modalHeader,
+.modalFooter {
+  padding: 5px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modalFooter {
+  border-top: 1px solid var(--border);
+  border-bottom: none;
+}
+
+.modal-body {
+  padding: 12px;
+  overflow: auto;
+}
+
+.columnsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 6px;
+}
+
+.checkbox {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.checkbox:hover {
+  background: rgba(255, 255, 255, 0.04);
+}

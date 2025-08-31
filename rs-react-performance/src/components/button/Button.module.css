@@ -1,0 +1,13 @@
+.btn {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #152039, #0f1830);
+  color: var(--text);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 12px;
+}
